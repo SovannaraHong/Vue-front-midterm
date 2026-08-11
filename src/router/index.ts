@@ -6,12 +6,17 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/categories',
+      redirect: '/login',
     },
     {
       path: '/categories',
       name: 'categories',
       component: () => import('@/views/categories/CategoryListView.vue'),
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/auth/LoginView.vue'),
     },
   ],
 })

@@ -1,6 +1,6 @@
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
-export const apiFetch = async (endpoint: string, options: RequestInit = {}) => {
+export const apiFetch = async <T>(endpoint: string, options: RequestInit = {}): Promise<T> => {
   const response = await fetch(`${BASE_URL}${endpoint}`, {
     ...options,
     headers: {
@@ -8,8 +8,10 @@ export const apiFetch = async (endpoint: string, options: RequestInit = {}) => {
       ...options.headers,
     },
   })
+
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`)
   }
+
   return response.json()
 }
