@@ -31,7 +31,7 @@ async function handleSubmit() {
   try {
     const user = await login({ ...form })
     localStorage.setItem('auth_user', JSON.stringify(user))
-    router.push({ name: 'categories' })
+    router.push({ name: 'dashboard' })
   } catch (err) {
     errorMessage.value = 'Invalid username or password.'
   } finally {
