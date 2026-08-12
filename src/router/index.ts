@@ -9,14 +9,26 @@ const router = createRouter({
       redirect: '/login',
     },
     {
-      path: '/categories',
-      name: 'categories',
-      component: () => import('@/views/categories/CategoryListView.vue'),
-    },
-    {
       path: '/login',
       name: 'login',
       component: () => import('@/views/auth/LoginView.vue'),
+    },
+
+    {
+      path: '/',
+      component: () => import('@/layouts/DashboardLayout.vue'),
+      children: [
+        {
+          path: 'dashboard',
+          name: 'dashboard',
+          component: () => import('@/views/dashboard/DashboardView.vue'),
+        },
+        {
+          path: 'categories',
+          name: 'categories',
+          component: () => import('@/views/categories/CategoryListView.vue'),
+        },
+      ],
     },
   ],
 })

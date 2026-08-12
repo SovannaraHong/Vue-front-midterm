@@ -31,7 +31,7 @@ async function handleSubmit() {
   try {
     const user = await login({ ...form })
     localStorage.setItem('auth_user', JSON.stringify(user))
-    router.push({ name: 'categories' })
+    router.push({ name: 'dashboard' })
   } catch (err) {
     errorMessage.value = 'Invalid username or password.'
   } finally {
@@ -41,22 +41,18 @@ async function handleSubmit() {
 </script>
 
 <template>
-  <div class="min-h-screen w-full flex items-center justify-center bg-gray-100 p-4">
-    <div class="w-full max-w-sm bg-gray-100 rounded-[2rem] p-3">
+  <div class="min-h-screen w-full flex items-center justify-center p-4">
+    <div class="w-[450px] bg-gray-100 rounded-[2rem] p-3">
       <div class="bg-white rounded-[1.75rem] shadow-sm px-8 py-10">
         <div class="flex justify-center mb-6">
-          <div
-            class="w-16 h-16 rounded-2xl bg-gray-700 flex items-center justify-center ring-8 ring-dashed ring-gray-100"
-          >
-            <div class="grid grid-cols-2 gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-white"></span>
-              <span class="w-2 h-2 rounded-full bg-white"></span>
-              <span class="w-2 h-2 rounded-full bg-white"></span>
-              <span class="w-2 h-2 rounded-full bg-white"></span>
+          <div class="flex justify-center mb-7">
+            <div
+              class="relative w-50 px-[10px] h-15 rounded-[10px] flex items-center justify-center shadow-lg shadow-gray-300/50 ring-8 ring-gray-100 overflow-hidden"
+            >
+              <img src="@/assets/logo1.svg" alt="Logo" class="w-50 h-50 object-contain" />
             </div>
           </div>
         </div>
-
         <h1 class="text-2xl font-bold text-gray-900 text-center">Sign in to continue</h1>
         <p class="text-sm text-gray-400 text-center mt-1 mb-8">
           Please sign in to start your rental application
@@ -213,7 +209,6 @@ async function handleSubmit() {
         </div>
       </div>
 
-      <!-- No public sign-up for staff accounts; remove or point this at a real route if you add one -->
       <p class="text-center text-sm text-gray-400 mt-6">
         Contact your administrator for account access.
       </p>
