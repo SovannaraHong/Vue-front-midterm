@@ -1,27 +1,115 @@
 import type { ActivityItem, GradientStatCard, NavItem, Order } from '@/types/dashboard'
 
 const navItems: NavItem[] = [
-  { label: 'Dashboard', icon: 'home', path: '/dashboard' },
-  { label: 'Widgets', icon: 'grid', path: '/categories' },
-  { label: 'UI Elements', icon: 'layers' },
-  { label: 'Advanced UI', icon: 'sliders' },
-  { label: 'Form Elements', icon: 'edit' },
-  { label: 'Editors', icon: 'code' },
-  { label: 'Charts', icon: 'barChart' },
-  { label: 'Tables', icon: 'table' },
-  { label: 'Popups', icon: 'messageSquare' },
-  { label: 'Notifications', icon: 'bell' },
-  { label: 'Icons', icon: 'star' },
-  { label: 'Maps', icon: 'mapPin' },
-  { label: 'User Pages', icon: 'user' },
-  { label: 'Error Pages', icon: 'alertTriangle' },
-  { label: 'General Pages', icon: 'file' },
-  { label: 'E-Commerce', icon: 'shoppingCart' },
-  { label: 'E-mail', icon: 'mail' },
-  { label: 'Calendar', icon: 'calendar' },
-  { label: 'Todo List', icon: 'checkSquare' },
-  { label: 'Gallery', icon: 'image' },
-  { label: 'Documentation', icon: 'bookOpen' },
+  {
+    label: 'Dashboard',
+    icon: 'home',
+    path: '/dashboard',
+    roles: ['ADMIN'],
+  },
+  {
+    label: 'Widgets',
+    icon: 'grid',
+    path: '/categories',
+    roles: ['ADMIN'],
+  },
+  {
+    label: 'Product',
+    icon: 'layers',
+    path: '/foods',
+    roles: ['ADMIN', 'USER','STOCK'],
+  },
+
+  {
+    label: 'Advanced UI',
+    icon: 'sliders',
+    roles: ['ADMIN'],
+  },
+  {
+    label: 'Form Elements',
+    icon: 'edit',
+    roles: ['ADMIN'],
+  },
+  {
+    label: 'Editors',
+    icon: 'code',
+    roles: ['ADMIN'],
+  },
+  {
+    label: 'Charts',
+    icon: 'barChart',
+    roles: ['ADMIN'],
+  },
+  {
+    label: 'Tables',
+    icon: 'table',
+    roles: ['ADMIN'],
+  },
+  {
+    label: 'Popups',
+    icon: 'messageSquare',
+    roles: ['ADMIN'],
+  },
+  {
+    label: 'Notifications',
+    icon: 'bell',
+    roles: ['ADMIN'],
+  },
+  {
+    label: 'Icons',
+    icon: 'star',
+    roles: ['ADMIN'],
+  },
+  {
+    label: 'Maps',
+    icon: 'mapPin',
+    roles: ['ADMIN'],
+  },
+  {
+    label: 'User Pages',
+    icon: 'user',
+    roles: ['ADMIN'],
+  },
+  {
+    label: 'Error Pages',
+    icon: 'alertTriangle',
+    roles: ['ADMIN'],
+  },
+  {
+    label: 'General Pages',
+    icon: 'file',
+    roles: ['ADMIN'],
+  },
+  {
+    label: 'E-Commerce',
+    icon: 'shoppingCart',
+    roles: ['ADMIN'],
+  },
+  {
+    label: 'E-mail',
+    icon: 'mail',
+    roles: ['ADMIN'],
+  },
+  {
+    label: 'Calendar',
+    icon: 'calendar',
+    roles: ['ADMIN'],
+  },
+  {
+    label: 'Todo List',
+    icon: 'checkSquare',
+    roles: ['ADMIN'],
+  },
+  {
+    label: 'Gallery',
+    icon: 'image',
+    roles: ['ADMIN'],
+  },
+  {
+    label: 'Documentation',
+    icon: 'bookOpen',
+    roles: ['ADMIN'],
+  },
 ]
 
 const gradientStatCards: GradientStatCard[] = [

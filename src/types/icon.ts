@@ -1,32 +1,34 @@
-export const ICON_PATHS = {
-  home: 'M3 11.5 12 4l9 7.5M5 10v9h5v-5h4v5h5v-9',
-  grid: 'M4 4h6v6H4V4Zm10 0h6v6h-6V4ZM4 14h6v6H4v-6Zm10 0h6v6h-6v-6Z',
-  layers: 'm12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5',
-  sliders: 'M4 6h16M4 12h16M4 18h16M8 4v4M14 10v4M10 16v4',
-  edit: 'M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5Z',
-  code: 'm8 9-4 3 4 3m8-6 4 3-4 3M13 5l-2 14',
-  barChart: 'M4 20V10m6 10V4m6 16v-7',
-  table: 'M3 4h18v16H3V4Zm0 6h18M9 4v16',
-  messageSquare: 'M21 15a2 2 0 0 1-2 2H8l-5 4V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9Z',
-  bell: 'M6 8a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6ZM10 20a2 2 0 0 0 4 0',
-  star: 'm12 2 3 7 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1 3-7Z',
-  mapPin: 'M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Zm0-9a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z',
-  user: 'M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm-8 9a8 8 0 0 1 16 0',
-  alertTriangle: 'M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0ZM12 9v4m0 4h.01',
-  file: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm0 0v6h6',
-  shoppingCart: 'M6 6h15l-1.5 9h-12L4 3H2m6 18a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm10 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z',
-  mail: 'M4 4h16v16H4V4Zm0 0 8 8 8-8',
-  calendar: 'M8 2v4M16 2v4M3 10h18M4 6h16v14H4V6Z',
-  checkSquare: 'M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11',
-  image: 'M3 3h18v18H3V3Zm4 12 4-4 3 3 4-5 3 6M8.5 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z',
-  bookOpen: 'M12 6.5c-2-1.5-5-2-8-1.5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5v-13c-3-.5-6 0-8 1.5Zm0 0v13',
-  search: 'm21 21-4.3-4.3M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z',
-  menu: 'M4 6h16M4 12h16M4 18h16',
-  plus: 'M12 5v14M5 12h14',
-  filter: 'M4 4h16l-6 8v6l-4 2v-8L4 4Z',
-  download: 'M12 3v12m0 0-4-4m4 4 4-4M4 21h16',
-  chevronLeft: 'm15 18-6-6 6-6',
-  chevronRight: 'm9 18 6-6-6-6',
-} as const
-
-export type IconName = keyof typeof ICON_PATHS
+export type IconName =
+  | 'home'
+  | 'grid'
+  | 'layers'
+  | 'sliders'
+  | 'edit'
+  | 'code'
+  | 'barChart'
+  | 'table'
+  | 'messageSquare'
+  | 'bell'
+  | 'star'
+  | 'mapPin'
+  | 'user'
+  | 'alertTriangle'
+  | 'file'
+  | 'shoppingCart'
+  | 'mail'
+  | 'calendar'
+  | 'checkSquare'
+  | 'image'
+  | 'bookOpen'
+  | 'search'
+  | 'filter'
+  | 'heart'
+  | 'cart'
+  | 'plus'
+  | 'minus'
+  | 'trash'
+  | 'x'
+  | 'menu'
+  | 'download'
+  | 'chevronLeft'
+  | 'chevronRight'

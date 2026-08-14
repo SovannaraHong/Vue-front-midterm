@@ -29,11 +29,19 @@ async function handleSubmit() {
 
   isSubmitting.value = true
   try {
-    const user = await login({ ...form })
-    localStorage.setItem('auth_user', JSON.stringify(user))
-    router.push({ name: 'dashboard' })
-  } catch (err) {
-    errorMessage.value = 'Invalid username or password.'
+   const user = await login({ ...form })
+
+localStorage.setItem('auth_user', JSON.stringify(user))
+
+if (user.role === 'ADMIN') {
+  router.push({ name: 'dashboard' })
+} else if (user.role === 'STOCK') {
+  router.push({ name: 'foods' })
+} else if (user.role === 'USER') {
+  router.push({ name: 'foods' })
+}
+  } catch (error) {
+    errorMessage.value = error instanceof Error ? error.message : 'Login failed. Please try again.'
   } finally {
     isSubmitting.value = false
   }
