@@ -8,16 +8,16 @@ const navItems: NavItem[] = [
     roles: ['ADMIN'],
   },
   {
-    label: 'Widgets',
+    label: 'Products',
     icon: 'grid',
     path: '/categories',
     roles: ['ADMIN'],
   },
   {
-    label: 'Product',
+    label: 'ProductList',
     icon: 'layers',
     path: '/foods',
-    roles: ['ADMIN', 'USER','STOCK'],
+    roles: ['ADMIN', 'USER', 'STOCK'],
   },
 
   {
@@ -55,61 +55,61 @@ const navItems: NavItem[] = [
     icon: 'bell',
     roles: ['ADMIN'],
   },
-  {
-    label: 'Icons',
-    icon: 'star',
-    roles: ['ADMIN'],
-  },
-  {
-    label: 'Maps',
-    icon: 'mapPin',
-    roles: ['ADMIN'],
-  },
-  {
-    label: 'User Pages',
-    icon: 'user',
-    roles: ['ADMIN'],
-  },
-  {
-    label: 'Error Pages',
-    icon: 'alertTriangle',
-    roles: ['ADMIN'],
-  },
-  {
-    label: 'General Pages',
-    icon: 'file',
-    roles: ['ADMIN'],
-  },
-  {
-    label: 'E-Commerce',
-    icon: 'shoppingCart',
-    roles: ['ADMIN'],
-  },
-  {
-    label: 'E-mail',
-    icon: 'mail',
-    roles: ['ADMIN'],
-  },
-  {
-    label: 'Calendar',
-    icon: 'calendar',
-    roles: ['ADMIN'],
-  },
-  {
-    label: 'Todo List',
-    icon: 'checkSquare',
-    roles: ['ADMIN'],
-  },
-  {
-    label: 'Gallery',
-    icon: 'image',
-    roles: ['ADMIN'],
-  },
-  {
-    label: 'Documentation',
-    icon: 'bookOpen',
-    roles: ['ADMIN'],
-  },
+  // {
+  //   label: 'Icons',
+  //   icon: 'star',
+  //   roles: ['ADMIN'],
+  // },
+  // {
+  //   label: 'Maps',
+  //   icon: 'mapPin',
+  //   roles: ['ADMIN'],
+  // },
+  // {
+  //   label: 'User Pages',
+  //   icon: 'user',
+  //   roles: ['ADMIN'],
+  // },
+  // {
+  //   label: 'Error Pages',
+  //   icon: 'alertTriangle',
+  //   roles: ['ADMIN'],
+  // },
+  // {
+  //   label: 'General Pages',
+  //   icon: 'file',
+  //   roles: ['ADMIN'],
+  // },
+  // {
+  //   label: 'E-Commerce',
+  //   icon: 'shoppingCart',
+  //   roles: ['ADMIN'],
+  // },
+  // {
+  //   label: 'E-mail',
+  //   icon: 'mail',
+  //   roles: ['ADMIN'],
+  // },
+  // {
+  //   label: 'Calendar',
+  //   icon: 'calendar',
+  //   roles: ['ADMIN'],
+  // },
+  // {
+  //   label: 'Todo List',
+  //   icon: 'checkSquare',
+  //   roles: ['ADMIN'],
+  // },
+  // {
+  //   label: 'Gallery',
+  //   icon: 'image',
+  //   roles: ['ADMIN'],
+  // },
+  // {
+  //   label: 'Documentation',
+  //   icon: 'bookOpen',
+  //   roles: ['ADMIN'],
+  // },
 ]
 
 const gradientStatCards: GradientStatCard[] = [

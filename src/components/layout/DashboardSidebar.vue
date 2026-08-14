@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 import type { NavItem } from '@/types/dashboard'
 import { getNavItems } from '@/services/dashboard.service'
 
 import AppIcon from '@/components/common/AppIcon.vue'
+import { logout } from '@/services/auth.service'
 
 interface Props {
   open?: boolean
@@ -16,6 +17,7 @@ withDefaults(defineProps<Props>(), {
 })
 
 const route = useRoute()
+const router = useRouter()
 
 const navItems = ref<NavItem[]>([])
 
@@ -45,13 +47,16 @@ const fetchNavItems = async () => {
     console.error('Failed to fetch navigation items:', error)
   }
 }
-
+function handleLogout() {
+  logout()
+  router.push({ name: 'login' })
+}
 onMounted(fetchNavItems)
 </script>
 
 <template>
   <aside
-    class="hidden md:flex flex-col bg-white shrink-0 overflow-hidden border-r border-slate-100 transition-all duration-300"
+    class="hidden md:flex flex-col bg-white shrink-0 overflow-hidden border-r h-screen border-slate-100 transition-all duration-300"
     :class="open ? 'w-64' : 'w-0'"
   >
     <!-- Logo -->
@@ -62,9 +67,7 @@ onMounted(fetchNavItems)
         L
       </div>
 
-      <span class="font-extrabold text-lg text-slate-800">
-        Red Hat System.
-      </span>
+      <span class="font-extrabold text-lg text-slate-800"> Red Hat System. </span>
     </div>
 
     <!-- Navigation -->
@@ -87,5 +90,13 @@ onMounted(fetchNavItems)
         </span>
       </RouterLink>
     </nav>
+    <div class="mt-[20px] mb-[130px] px-[10px]">
+      <button
+        @click="handleLogout"
+        class="px-4 py-2.5 w-full rounded-[5px] text-white font-semibold font-sans text-[13px] font-medium cursor-pointer bg-[#fb669a]"
+      >
+        Logout
+      </button>
+    </div>
   </aside>
 </template>

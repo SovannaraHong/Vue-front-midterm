@@ -6,5 +6,5 @@ export interface LoginRequest {
 export interface LoginResponse {
   sid: number
   userName: string
-  role: string
+  role: 'ADMIN' | 'STOCK' | 'USER'
 }

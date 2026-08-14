@@ -36,6 +36,8 @@ import {
   faDownload,
   faChevronLeft,
   faChevronRight,
+  faTag,
+  faShoppingBag,
 } from '@fortawesome/free-solid-svg-icons'
 
 import type { IconName } from '@/types/icon'
@@ -85,14 +87,14 @@ const icons = {
   download: faDownload,
   chevronLeft: faChevronLeft,
   chevronRight: faChevronRight,
+
+  tag: faTag,
+  bag: faShoppingBag,
 }
 
 const icon = computed(() => icons[props.name])
 </script>
 
 <template>
-  <FontAwesomeIcon
-    :icon="icon"
-    :style="{ fontSize: `${size}px` }"
-  />
+  <FontAwesomeIcon :icon="icon" :style="{ fontSize: `${size}px` }" />
 </template>

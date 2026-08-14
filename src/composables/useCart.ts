@@ -2,7 +2,7 @@ import { computed, ref } from 'vue'
 import type { CartItem, Product } from '@/types/product'
 
 const cart = ref<CartItem[]>([])
-const discount = ref(0) // flat currency discount, e.g. 3 -> -$3.00
+const discount = ref(0)
 
 export function useCart() {
   const addToCart = (product: Product) => {

@@ -9,6 +9,7 @@ export interface Product {
   categoryName: string
   soldQty: number
   imageUrl?: string
+  description: string
 }
 
 // Mirrors com.midterm.midterm.dto.request.ProductRequest
@@ -18,6 +19,7 @@ export interface ProductRequest {
   price: number
   expiredDate: string
   catId: number
+  description: string
 }
 
 // UI-only: an item sitting in the cart on the right-hand "My Order" panel
