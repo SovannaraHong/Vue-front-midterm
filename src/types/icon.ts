@@ -1,3 +1,4 @@
+// types/icon.ts
 export type IconName =
   | 'home'
   | 'grid'
@@ -32,3 +33,5 @@ export type IconName =
   | 'download'
   | 'chevronLeft'
   | 'chevronRight'
+  | 'tag'
+  | 'bag'

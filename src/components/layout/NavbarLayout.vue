@@ -2,6 +2,11 @@
 import AppIcon from '@/components/common/AppIcon.vue'
 
 const emit = defineEmits<{ (e: 'toggle-sidebar'): void }>()
+
+function getAuthUser() {
+  const authUser = localStorage.getItem('auth_user')
+  return authUser ? JSON.parse(authUser) : null
+}
 </script>
 
 <template>
@@ -42,11 +47,13 @@ const emit = defineEmits<{ (e: 'toggle-sidebar'): void }>()
         <div
           class="w-9 h-9 rounded-full bg-gradient-to-br from-violet-500 to-violet-400 flex items-center justify-center text-white text-xs font-bold"
         >
-          MJ
+          {{ getAuthUser()?.userName?.charAt(0)?.toUpperCase() || 'M' }}
         </div>
         <div class="hidden md:block leading-tight">
-          <div class="text-xs font-semibold text-slate-700">Maria Jones</div>
-          <div class="text-[10px] text-slate-400">Admin</div>
+          <div class="text-xs font-semibold text-slate-700">
+            {{ getAuthUser()?.userName || 'Maria Jones' }}
+          </div>
+          <div class="text-[11px] text-slate-400">{{ getAuthUser()?.role || 'Admin' }}</div>
         </div>
       </div>
     </div>
