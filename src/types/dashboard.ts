@@ -4,6 +4,7 @@ export interface NavItem {
   label: string
   icon: IconName
   path?: string
+  roles?: string[]
 }
 
 export interface StatPillData {
