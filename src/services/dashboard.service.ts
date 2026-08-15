@@ -23,6 +23,7 @@ const navItems: NavItem[] = [
   {
     label: 'Advanced UI',
     icon: 'sliders',
+    path: '/products',
     roles: ['ADMIN'],
   },
   {

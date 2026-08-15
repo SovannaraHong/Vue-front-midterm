@@ -28,7 +28,6 @@ export const deleteProduct = (id: number) => {
     method: 'DELETE',
   })
 }
-
 export const getExpiredProducts = () => {
   return apiFetch<Product[]>('/api/products/expired')
 }

@@ -4,7 +4,6 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
 
   routes: [
-
     {
       path: '/',
       redirect: '/login',
@@ -16,7 +15,6 @@ const router = createRouter({
       component: () => import('@/views/auth/LoginView.vue'),
     },
 
-
     {
       path: '/',
       component: () => import('@/layouts/DashboardLayout.vue'),
@@ -26,7 +24,6 @@ const router = createRouter({
       },
 
       children: [
-
         {
           path: 'dashboard',
           name: 'dashboard',
@@ -37,7 +34,6 @@ const router = createRouter({
             roles: ['ADMIN'],
           },
         },
-
 
         {
           path: 'categories',
@@ -50,11 +46,20 @@ const router = createRouter({
           },
         },
 
-
         {
           path: 'foods',
           name: 'foods',
           component: () => import('@/views/food/FoodOrderView.vue'),
+
+          meta: {
+            requiresAuth: true,
+            roles: ['ADMIN', 'STOCK', 'USER'],
+          },
+        },
+        {
+          path: 'products',
+          name: 'products',
+          component: () => import('@/views/products/ProductListView.vue'),
 
           meta: {
             requiresAuth: true,
