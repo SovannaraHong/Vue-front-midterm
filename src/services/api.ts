@@ -13,5 +13,9 @@ export const apiFetch = async <T>(endpoint: string, options: RequestInit = {}): 
     throw new Error(`HTTP error! status: ${response.status}`)
   }
 
+  if (response.status === 204) {
+    return undefined as T
+  }
+
   return response.json()
 }
