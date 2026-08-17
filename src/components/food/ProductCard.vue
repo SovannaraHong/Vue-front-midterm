@@ -8,7 +8,7 @@ const emit = defineEmits<{ (e: 'add', product: Product): void }>()
 
 <template>
   <div
-    class="bg-white rounded-2xl p-2.5 border font-sans border-slate-100 hover:shadow-md transition-shadow"
+    class="bg-white rounded-2xl font-kantumruy p-2.5 border font-sans border-slate-100 hover:shadow-md transition-shadow"
   >
     <!-- Photo + hang-tag price -->
     <div class="relative rounded-xl overflow-hidden bg-slate-100">
@@ -73,7 +73,7 @@ const emit = defineEmits<{ (e: 'add', product: Product): void }>()
         @click="emit('add', product)"
       >
         <AppIcon name="bag" :size="14" />
-        Add to bag
+        ដាក់ចូលកន្រក់
       </button>
     </div>
   </div>

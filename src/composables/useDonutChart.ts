@@ -1,5 +1,6 @@
+// src/composables/useDonutChart.ts
 import { Chart, type ChartConfiguration } from 'chart.js/auto'
-import { onBeforeUnmount, onMounted, type Ref } from 'vue'
+import type { Ref } from 'vue'
 
 export interface DonutSlice {
   label: string
@@ -8,40 +9,37 @@ export interface DonutSlice {
 }
 
 export function useDonutChart(canvasRef: Ref<HTMLCanvasElement | null>, slices: DonutSlice[]) {
-  let chart: Chart | null = null
+  const canvas = canvasRef.value
+  if (!canvas) return null
 
-  const render = () => {
-    const canvas = canvasRef.value
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return null
 
-    const config: ChartConfiguration<'doughnut'> = {
-      type: 'doughnut',
-      data: {
-        labels: slices.map((s) => s.label),
-        datasets: [
-          {
-            data: slices.map((s) => s.value),
-            backgroundColor: slices.map((s) => s.color),
-            borderWidth: 0,
-            hoverOffset: 6,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutout: '70%',
-        plugins: { legend: { display: false } },
-      },
-    }
+  // Destroy any existing chart bound to this canvas before creating a new one
+  // (prevents "Canvas is already in use" when this runs again on refetch)
+  const existing = Chart.getChart(canvas)
+  existing?.destroy()
 
-    chart = new Chart(ctx, config)
+  const config: ChartConfiguration<'doughnut'> = {
+    type: 'doughnut',
+    data: {
+      labels: slices.map((s) => s.label),
+      datasets: [
+        {
+          data: slices.map((s) => s.value),
+          backgroundColor: slices.map((s) => s.color),
+          borderWidth: 0,
+          hoverOffset: 6,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '62%',
+      plugins: { legend: { display: false } },
+    },
   }
 
-  onMounted(render)
-  onBeforeUnmount(() => chart?.destroy())
-
-  return { destroy: () => chart?.destroy() }
+  return new Chart(ctx, config)
 }

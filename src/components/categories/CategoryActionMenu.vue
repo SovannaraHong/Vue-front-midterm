@@ -27,7 +27,7 @@ const handleDelete = () => {
 </script>
 
 <template>
-  <div ref="menuRef" class="relative font-kantumruy">
+  <div ref="menuRef" class="relative flex justify-end">
     <button
       type="button"
       class="w-7 h-7 rounded-md flex items-center justify-center text-black font-extrabold text-[20px] hover:bg-slate-100 hover:text-slate-600 leading-none"
@@ -38,7 +38,7 @@ const handleDelete = () => {
 
     <div
       v-if="open"
-      class="absolute right-0 top-9 z-10 w-36 bg-white rounded-xl shadow-lg border border-slate-100 py-1"
+      class="absolute right-0 top-9 z-20 w-36 bg-white rounded-xl shadow-lg border border-slate-100 py-1"
     >
       <button
         type="button"
@@ -51,7 +51,7 @@ const handleDelete = () => {
 
       <button
         type="button"
-        class="w-full flex items-center gap-2 px-3 py-2 text-[12px] hover:bg-red-50 text-red-500"
+        class="w-full flex items-center gap-2 px-3 py-2 text-[12px] text-red-500 hover:bg-red-50"
         @click="handleDelete"
       >
         <AppIcon name="trash" :size="12" />
