@@ -25,7 +25,7 @@ const isLowStock = (qty: number) => qty <= 5
         @change="emit('toggle-select', product.pid)"
       />
     </td>
-
+    <td class="px-2 py-3 text-[12px] text-slate-500">{{ product.pid }}</td>
     <td class="px-2 py-3">
       <div class="flex items-center gap-3">
         <img
@@ -58,6 +58,14 @@ const isLowStock = (qty: number) => qty <= 5
     </td>
 
     <td class="px-2 py-3 text-[12px] text-slate-500">{{ product.expiredDate }}</td>
+    <td class="px-2 py-3 text-[12px]">
+      <span
+        class="px-2.5 py-1 rounded-full text-[11px] font-medium"
+        :class="product.status ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-500'"
+      >
+        {{ product.status ? 'Active' : 'Inactive' }}
+      </span>
+    </td>
 
     <td class="px-4 py-3">
       <div class="flex items-center justify-end">

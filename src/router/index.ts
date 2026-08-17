@@ -42,7 +42,29 @@ const router = createRouter({
 
           meta: {
             requiresAuth: true,
-            roles: ['ADMIN'],
+            roles: ['ADMIN', 'STOCK'],
+          },
+        },
+
+        {
+          path: 'categories/new',
+          name: 'category-create',
+          component: () => import('@/views/categories/CategoryCreateView.vue'),
+
+          meta: {
+            requiresAuth: true,
+            roles: ['ADMIN', 'STOCK'],
+          },
+        },
+
+        {
+          path: 'categories/:id/edit',
+          name: 'category-edit',
+          component: () => import('@/views/categories/CategoryEditView.vue'),
+
+          meta: {
+            requiresAuth: true,
+            roles: ['ADMIN', 'STOCK'],
           },
         },
 
@@ -63,7 +85,61 @@ const router = createRouter({
 
           meta: {
             requiresAuth: true,
-            roles: ['ADMIN', 'STOCK', 'USER'],
+            roles: ['ADMIN', 'STOCK'],
+          },
+        },
+        {
+          path: '/products/new',
+          component: () => import('@/views/products/ProductCreateView.vue'),
+
+          meta: {
+            requiresAuth: true,
+            roles: ['ADMIN', 'STOCK'],
+          },
+        },
+        {
+          path: '/products/:id/edit',
+          component: () => import('@/views/products/ProductEditView.vue'),
+          meta: {
+            requiresAuth: true,
+            roles: ['ADMIN', 'STOCK'],
+          },
+        },
+        {
+          path: '/staff',
+          component: () => import('@/views/staff/StaffListView.vue'),
+          meta: {
+            requiresAuth: true,
+            roles: ['ADMIN'],
+          },
+        },
+
+        {
+          path: 'staff/new',
+          name: 'staff-create',
+          component: () => import('@/views/staff/StaffCreateView.vue'),
+
+          meta: {
+            requiresAuth: true,
+            roles: ['ADMIN'],
+          },
+        },
+        {
+          path: 'staff/:id/edit',
+          name: 'staff-edit',
+          component: () => import('@/views/staff/StaffEditView.vue'),
+
+          meta: {
+            requiresAuth: true,
+            roles: ['ADMIN'],
+          },
+        },
+        {
+          path: '/sale',
+          component: () => import('@/views/sale/SaleListView.vue'),
+          meta: {
+            requiresAuth: true,
+            roles: ['ADMIN'],
           },
         },
       ],

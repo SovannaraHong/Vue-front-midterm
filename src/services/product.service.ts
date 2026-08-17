@@ -49,3 +49,11 @@ export const getBestSeller = () => {
 export const getBestSellerByCategory = (catId: number) => {
   return apiFetch<Product>(`/api/products/category/${catId}/best-seller`)
 }
+export const uploadProductImage = (id: number, file: File) => {
+  const formData = new FormData()
+  formData.append('file', file)
+  return apiFetch<Product>(`/api/products/${id}/image`, {
+    method: 'POST',
+    body: formData,
+  })
+}

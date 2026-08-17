@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
-import type { OrderMode, PaymentMethod, Product } from '@/types/product'
+import { computed, onMounted, ref, watch } from 'vue'
+import type { PaymentMethod, Product } from '@/types/product'
 import type { SaleItemRequest } from '@/types/sale'
 import { getAllProducts } from '@/services/product.service'
 import { createSale } from '@/services/sale.service'
@@ -19,14 +19,15 @@ const category = ref<Category[]>([])
 const loading = ref(false)
 const error = ref<string | null>(null)
 const search = ref('')
-const activeCategory = ref('All')
-const orderMode = ref<OrderMode>('Dine')
+const activeCategory = ref('ទាំងអស់') // "All" -> "ទាំងអស់"
+// const orderMode = ref<OrderMode>('Dine')
 
-const orderModes: OrderMode[] = ['Dine', 'Pick Up', 'Delivery']
+// const orderModes: OrderMode[] = ['ញ៉ាំនៅទីនេះ', 'ខ្ចប់', 'ដឹកជញ្ជូន']
 
 const {
   cart,
   discount,
+  cartError,
   addToCart,
   increment,
   decrement,
@@ -35,6 +36,14 @@ const {
   itemsTotal,
   totalAmount,
 } = useCart()
+
+// Auto-dismiss the stock warning a few seconds after it appears.
+watch(cartError, (message) => {
+  if (!message) return
+  window.setTimeout(() => {
+    if (cartError.value === message) cartError.value = null
+  }, 3500)
+})
 
 const isCheckingOut = ref(false)
 const checkoutError = ref('')
@@ -47,7 +56,7 @@ const fetchProducts = async () => {
     products.value = await getAllProducts()
     category.value = await getCategories()
   } catch (err) {
-    error.value = err instanceof Error ? err.message : 'Failed to fetch products'
+    error.value = err instanceof Error ? err.message : 'បរាជ័យក្នុងការទាញយកទិន្នន័យផលិតផល'
   } finally {
     loading.value = false
   }
@@ -59,22 +68,24 @@ onMounted(() => {
 })
 
 const categories = computed(() => [
-  'All',
+  'ទាំងអស់',
   ...Array.from(new Set(category.value.map((c) => c.categoryName))),
 ])
 
 const filteredProducts = computed(() =>
   products.value.filter((p) => {
+    const matchesStatus = p.status === true
+
     const matchesCategory =
-      activeCategory.value === 'All' || p.categoryName === activeCategory.value
+      activeCategory.value === 'ទាំងអស់' || p.categoryName === activeCategory.value
 
     const matchesSearch = p.productName.toLowerCase().includes(search.value.toLowerCase())
 
-    return matchesCategory && matchesSearch
+    return matchesStatus && matchesCategory && matchesSearch
   }),
 )
 
-const today = new Date().toLocaleDateString('en-US', {
+const today = new Date().toLocaleDateString('km-KH', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
@@ -82,7 +93,7 @@ const today = new Date().toLocaleDateString('en-US', {
 
 const handleCheckout = async (method: PaymentMethod) => {
   if (cart.value.length === 0) {
-    checkoutError.value = 'Cart is empty.'
+    checkoutError.value = 'កន្ត្រកទំនិញទទេរ។'
     return
   }
 
@@ -108,7 +119,7 @@ const handleCheckout = async (method: PaymentMethod) => {
     discount.value = 0
     await fetchProducts()
   } catch (err) {
-    checkoutError.value = err instanceof Error ? err.message : 'Checkout failed.'
+    checkoutError.value = err instanceof Error ? err.message : 'ការទូទាត់ប្រាក់បរាជ័យ។'
   } finally {
     isCheckingOut.value = false
   }
@@ -116,7 +127,25 @@ const handleCheckout = async (method: PaymentMethod) => {
 </script>
 
 <template>
-  <div class="h-screen bg-[#f7f7f9] flex">
+  <div class="h-screen font-kantumruy bg-[#f7f7f9] flex relative">
+    <!-- Out-of-stock toast -->
+    <Transition
+      enter-active-class="transition duration-200 ease-out"
+      enter-from-class="opacity-0 -translate-y-2"
+      enter-to-class="opacity-100 translate-y-0"
+      leave-active-class="transition duration-150 ease-in"
+      leave-from-class="opacity-100 translate-y-0"
+      leave-to-class="opacity-0 -translate-y-2"
+    >
+      <div
+        v-if="cartError"
+        class="absolute top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 bg-slate-900 text-white text-[12px] font-medium rounded-full pl-3 pr-4 py-2 shadow-lg"
+      >
+        <AppIcon name="alertTriangle" :size="14" class="text-amber-400" />
+        {{ cartError }}
+      </div>
+    </Transition>
+
     <!-- Left: menu -->
     <div class="flex-1 p-6">
       <div class="flex items-start justify-between gap-4 mb-6">
@@ -124,14 +153,14 @@ const handleCheckout = async (method: PaymentMethod) => {
           <p class="text-[11px] text-slate-400">
             {{ today }}
           </p>
-          <h1 class="font-poppins text-4xl font-extrabold text-slate-800">Grill Restaurant</h1>
+          <h1 class="font-poppins text-4xl font-extrabold text-slate-800">អាហារដ្ឋានមួកក្រហម</h1>
         </div>
 
         <div class="flex items-center gap-2 bg-white rounded-full px-4 py-2 shadow-sm w-72">
           <AppIcon name="search" :size="15" class="text-slate-400" />
           <input
             v-model="search"
-            placeholder="Search Here"
+            placeholder="ស្វែងរកនៅទីនេះ"
             class="bg-transparent outline-none text-sm text-slate-600 placeholder:text-slate-400 w-full"
           />
           <AppIcon name="filter" :size="15" class="text-slate-400" />
@@ -139,9 +168,9 @@ const handleCheckout = async (method: PaymentMethod) => {
       </div>
 
       <div class="flex items-center justify-between mb-4">
-        <h2 class="text-[15px] font-bold text-slate-800">Find The Best Food</h2>
+        <h2 class="text-[15px] font-bold text-slate-800">ស្វែងរកអាហារឆ្ងាញ់ៗ</h2>
         <a href="#" class="text-[12px] font-semibold text-emerald-600 hover:underline">
-          View All
+          មើលទាំងអស់
         </a>
       </div>
 
@@ -151,10 +180,10 @@ const handleCheckout = async (method: PaymentMethod) => {
         @select="activeCategory = $event"
       />
 
-      <p v-if="loading" class="text-xs text-slate-400 mt-6">Loading menu...</p>
+      <p v-if="loading" class="text-xs text-slate-400 mt-6">កំពុងផ្ទុកបញ្ជីមុខម្ហូប...</p>
       <p v-else-if="error" class="text-xs text-red-500 mt-6">{{ error }}</p>
       <p v-else-if="filteredProducts.length === 0" class="text-xs text-slate-400 mt-6">
-        No dishes found.
+        មិនមានមុខម្ហូបត្រូវបានរកឃើញទេ។
       </p>
 
       <div v-else class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-5">
@@ -170,13 +199,13 @@ const handleCheckout = async (method: PaymentMethod) => {
     <!-- Right: order sidebar -->
     <aside class="w-96 shrink-0 bg-white border-l border-slate-100 p-5 flex flex-col">
       <div class="flex items-center justify-between mb-4">
-        <h2 class="text-[15px] font-bold text-slate-800">My Order</h2>
+        <h2 class="text-[15px] font-bold text-slate-800">ការកុម្ម៉ង់របស់ខ្ញុំ</h2>
         <button class="text-slate-300 hover:text-slate-500">
           <AppIcon name="x" :size="16" />
         </button>
       </div>
 
-      <div class="flex items-center gap-2 mb-4">
+      <!-- <div class="flex items-center gap-2 mb-4">
         <button
           v-for="mode in orderModes"
           :key="mode"
@@ -190,11 +219,11 @@ const handleCheckout = async (method: PaymentMethod) => {
         >
           {{ mode }}
         </button>
-      </div>
+      </div> -->
 
       <div class="flex-1 overflow-y-auto">
         <p v-if="cart.length === 0" class="text-xs text-slate-400 text-center py-10">
-          Your cart is empty — add something tasty!
+          កន្ត្រករបស់អ្នកទទេរ — សូមជ្រើសរើសអាហារឆ្ងាញ់ៗ!
         </p>
         <CartItem
           v-for="item in cart"
@@ -208,7 +237,7 @@ const handleCheckout = async (method: PaymentMethod) => {
 
       <div class="mt-4 pt-4 border-t border-slate-100">
         <p v-if="checkoutError" class="text-xs text-red-500 mb-2">{{ checkoutError }}</p>
-        <p v-if="isCheckingOut" class="text-xs text-slate-400 mb-2">Processing...</p>
+        <p v-if="isCheckingOut" class="text-xs text-slate-400 mb-2">កំពុងដំណើរការ...</p>
 
         <OrderSummary
           :items-total="itemsTotal"

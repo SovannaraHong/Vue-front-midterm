@@ -6,6 +6,7 @@ export interface Product {
   price: number
   expiredDate: string // LocalDate -> ISO string, e.g. "2026-06-15"
   catId: number
+  status: boolean
   categoryName: string
   soldQty: number
   imageUrl?: string
@@ -20,6 +21,7 @@ export interface ProductRequest {
   expiredDate: string
   catId: number
   description: string
+  status: boolean
 }
 
 // UI-only: an item sitting in the cart on the right-hand "My Order" panel

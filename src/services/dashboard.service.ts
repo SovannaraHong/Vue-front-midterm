@@ -7,55 +7,57 @@ const navItems: NavItem[] = [
     path: '/dashboard',
     roles: ['ADMIN'],
   },
-  {
-    label: 'Products',
-    icon: 'grid',
-    path: '/categories',
-    roles: ['ADMIN'],
-  },
+
   {
     label: 'ProductList',
     icon: 'layers',
     path: '/foods',
     roles: ['ADMIN', 'USER', 'STOCK'],
   },
-
   {
-    label: 'Advanced UI',
+    label: 'Sale Detail',
+    icon: 'grid',
+    path: '/sale',
+    roles: ['ADMIN'],
+  },
+  {
+    label: 'Product',
     icon: 'sliders',
     path: '/products',
+    roles: ['ADMIN', 'STOCK'],
+  },
+  {
+    label: 'User',
+    icon: 'user',
+    path: '/staff',
     roles: ['ADMIN'],
   },
   {
-    label: 'Form Elements',
-    icon: 'edit',
-    roles: ['ADMIN'],
-  },
-  {
-    label: 'Editors',
+    label: 'Category',
     icon: 'code',
-    roles: ['ADMIN'],
+    path: '/categories',
+    roles: ['ADMIN', 'STOCK'],
   },
-  {
-    label: 'Charts',
-    icon: 'barChart',
-    roles: ['ADMIN'],
-  },
-  {
-    label: 'Tables',
-    icon: 'table',
-    roles: ['ADMIN'],
-  },
-  {
-    label: 'Popups',
-    icon: 'messageSquare',
-    roles: ['ADMIN'],
-  },
-  {
-    label: 'Notifications',
-    icon: 'bell',
-    roles: ['ADMIN'],
-  },
+  // {
+  //   label: 'Charts',
+  //   icon: 'barChart',
+  //   roles: ['ADMIN'],
+  // },
+  // {
+  //   label: 'Tables',
+  //   icon: 'table',
+  //   roles: ['ADMIN'],
+  // },
+  // {
+  //   label: 'Popups',
+  //   icon: 'messageSquare',
+  //   roles: ['ADMIN'],
+  // },
+  // {
+  //   label: 'Notifications',
+  //   icon: 'bell',
+  //   roles: ['ADMIN'],
+  // },
   // {
   //   label: 'Icons',
   //   icon: 'star',

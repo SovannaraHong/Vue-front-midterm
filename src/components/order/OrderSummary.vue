@@ -15,23 +15,23 @@ const activeMethod = ref<PaymentMethod>('Cash')
 </script>
 
 <template>
-  <div>
+  <div class="mb-[50px] font-kantumruy">
     <div class="space-y-2 text-[12px]">
       <div class="flex items-center justify-between">
-        <span class="text-slate-400">Items</span>
+        <span class="text-slate-400">ទំនិញសរុប</span>
         <span class="font-semibold text-slate-700">${{ itemsTotal.toFixed(2) }}</span>
       </div>
       <!-- <div class="flex items-center justify-between">
-        <span class="text-slate-400">Discount</span>
+        <span class="text-slate-400">បញ្ចុះតម្លៃ</span>
         <span class="font-semibold text-red-500">-${{ discount.toFixed(2) }}</span>
       </div> -->
       <div class="flex items-center justify-between pt-2 border-t border-slate-100">
-        <span class="text-slate-500 font-medium">Total Amount</span>
+        <span class="text-slate-500 font-medium">ទឹកប្រាក់ត្រូវទូទាត់</span>
         <span class="font-bold text-slate-800">${{ totalAmount.toFixed(2) }}</span>
       </div>
     </div>
 
-    <h4 class="text-[13px] font-bold text-slate-800 mt-6 mb-3">Payments</h4>
+    <h4 class="text-[13px] font-bold text-slate-800 mt-6 mb-3">វិធីសាស្ត្រទូទាត់</h4>
     <!-- <div class="flex items-center gap-2">
       <button
         v-for="method in methods"
@@ -52,7 +52,7 @@ const activeMethod = ref<PaymentMethod>('Cash')
       class="w-full mt-5 bg-emerald-500 hover:bg-emerald-600 text-white text-[13px] font-semibold rounded-xl py-3"
       @click="emit('checkout', activeMethod)"
     >
-      Checkout
+      គិតប្រាក់
     </button>
   </div>
 </template>
