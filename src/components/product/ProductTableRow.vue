@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { Product } from '@/types/product'
 import ProductActionsMenu from './ProductActionsMenu.vue'
 
-defineProps<{ product: Product; selected: boolean }>()
+const props = defineProps<{ product: Product; selected: boolean }>()
 const emit = defineEmits<{
   (e: 'toggle-select', id: number): void
   (e: 'edit', id: number): void
@@ -10,12 +11,28 @@ const emit = defineEmits<{
 }>()
 
 const isLowStock = (qty: number) => qty <= 5
+
+const isExpired = computed(() => {
+  if (!props.product.expiredDate) return false
+  // Compare by date only (ignore time) so "today" is not flagged as expired.
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  const expiry = new Date(props.product.expiredDate)
+  expiry.setHours(0, 0, 0, 0)
+  return expiry < today
+})
 </script>
 
 <template>
   <tr
     class="border-b border-slate-50 last:border-0 transition-colors"
-    :class="selected ? 'bg-pink-50/60' : 'hover:bg-slate-50/60'"
+    :class="[
+      isExpired
+        ? 'bg-red-50/70 hover:bg-red-50'
+        : selected
+          ? 'bg-pink-50/60'
+          : 'hover:bg-slate-50/60',
+    ]"
   >
     <td class="px-4 py-3">
       <input
@@ -57,7 +74,11 @@ const isLowStock = (qty: number) => qty <= 5
       </span>
     </td>
 
-    <td class="px-2 py-3 text-[12px] text-slate-500">{{ product.expiredDate }}</td>
+    <td class="px-2 py-3 text-[12px]">
+      <span class="font-medium" :class="isExpired ? 'text-red-600' : 'text-slate-500'">
+        {{ product.expiredDate }}
+      </span>
+    </td>
     <td class="px-2 py-3 text-[12px]">
       <span
         class="px-2.5 py-1 rounded-full text-[11px] font-medium"
